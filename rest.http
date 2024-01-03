@@ -1,0 +1,84 @@
+
+// product routes
+POST http://localhost:3000/products
+Content-Type: application/json
+{
+    "name": "iMac Pro",
+    "price": 4999
+}
+
+GET http://localhost:3000/api/v1/products
+
+GET http://localhost:3000/products/id
+
+PATCH http://localhost:3000/products/6543c6798bc36c4bf65481c4
+Content-Type: application/json
+  {
+    "name": "Golden Penny Noodles",
+    "price": 8000,
+    "description": "5kg Golden Penny Noodles ",
+    "quantity": "0",
+    "inStock": false,
+    "__v": 0,
+    "dateCreated": "2023-11-03T15:20:23.129Z"
+  }
+
+DELETE http://localhost:3000/products/id
+
+// user routes
+POST http://localhost:3000/users
+{
+    "firstname": "David",
+    "lastname": "Osuchukwu",
+    "email": "osuchukwudavid@gmail.com",
+    "phoneNumber": "09023456643",
+    "password": "12345678",
+    "status": "verified",
+    "gender": "M",
+    "dateOfBirth": "12-09-98",
+    "address": "23 Faith Drive, Lagos",
+    "role": "user",
+    "dateCreated": "2-11-2023"
+}
+
+GET http://localhost:3000/users
+
+GET http://localhost:3000/users/id
+
+PATCH http://localhost:3000/users/id
+
+DELETE http://localhost:3000/users/id
+
+// test route
+GET http://localhost:3000/test?name=iMac&price=2399
+
+GET http://localhost:3000/test/8713318734
+
+POST http://localhost:3000/test
+Content-Type: application/json
+{
+    "name": "iMac Pro",
+    "price": 4999
+}
+
+// auth routes
+POST http://localhost:3000/api/auth/signup
+Content-Type: application/json
+{
+    "firstname": "David",
+    "lastname": "Osuchukwu",
+    "email": "osuchukwudavid@gmail.com",
+    "phoneNumber": "09023456643",
+    "password": "12345678",
+    "status": "verified",
+    "gender": "M",
+    "dateOfBirth": "12-09-98",
+    "address": "23 Faith Drive, Lagos",
+    "role": "user",
+    "dateCreated": "2-11-2023"
+}
+
+
+POST http://localhost:3000/api/v1/products
+
+

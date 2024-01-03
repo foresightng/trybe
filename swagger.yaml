@@ -1,0 +1,778 @@
+openapi: 3.0.0
+info:
+  title: Warehouse Co
+  description: Warehouse and Inventory management system restful Api
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://odd-rose-turkey-wear.cyclic.app/api/v1
+    variables: {}
+paths:
+  /products:
+    post:
+      tags:
+        - Product
+      summary: Create Product
+      description: Create new product for the admin or owner
+      operationId: CreateProduct
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - product
+                - price
+                - name
+                - category
+              type: object
+              properties:
+                product:
+                  type: string
+                price:
+                  type: integer
+                  format: int32
+                  example: 32000
+                name:
+                  type: string
+                  example: Bag of rice
+                category:
+                  type: string
+                  example: Food
+        required: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Product
+      summary: Show all Product
+      description: Show all products for all
+      operationId: ShowallProduct
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /product/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The product ID
+    delete:
+      tags:
+        - Product
+      summary: Delete Product
+      description: Delete Product for the owner
+      operationId: DeleteProduct
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+
+    get:
+      tags:
+        - Product
+      summary: Show Single Product
+      description: Show single product
+      operationId: ShowSingleProduct
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+        - Product
+      summary: Edit Product
+      description: Make edits to product for owner
+      operationId: EditProduct
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - price
+              type: object
+              properties:
+                price:
+                  type: integer
+                  format: int32
+                  example: 45000
+        required: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /inventory:
+    get:
+      tags:
+        - Inventory
+      summary: Show all inventory list
+      description: Show all inventory lists for all except cashier
+      operationId: Showallinventorylist
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Inventory
+      summary: Create inventory list
+      description: Create new inventory list for only warehouse manager
+      operationId: Createinventorylist
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/CreateinventorylistRequest"
+                - example:
+                    inventoryItems:
+                      - productId: 63712313cecef52a241893ea
+                        quantity: 30
+                      - productId: 6371232dcecef52a241893ec
+                        quantity: 25
+                      - productId: 637122e5cecef52a241893e8
+                        quantity: 60
+                      - productId: 637122b0cecef52a241893e6
+                        quantity: 50
+                      - productId: 63712286cecef52a241893e4
+                        quantity: 10
+                      - productId: 6371226fcecef52a241893e2
+                        quantity: 73
+            example:
+              inventoryItems:
+                - productId: 63712313cecef52a241893ea
+                  quantity: 30
+                - productId: 6371232dcecef52a241893ec
+                  quantity: 25
+                - productId: 637122e5cecef52a241893e8
+                  quantity: 60
+                - productId: 637122b0cecef52a241893e6
+                  quantity: 50
+                - productId: 63712286cecef52a241893e4
+                  quantity: 10
+                - productId: 6371226fcecef52a241893e2
+                  quantity: 73
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /inventory/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The inventory ID
+    patch:
+      tags:
+        - Inventory
+      summary: Edit inventory list
+      description: Make edits to declined inventory lists for warehouse manager
+      operationId: Editinventorylist
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/EditinventorylistRequest"
+                - example:
+                    inventoryItems:
+                      - productId: 63712313cecef52a241893ea
+                        quantity: 30
+                      - productId: 6371232dcecef52a241893ec
+                        quantity: 15
+                      - productId: 637122e5cecef52a241893e8
+                        quantity: 12
+                      - productId: 637122b0cecef52a241893e6
+                        quantity: 5
+                      - productId: 63712286cecef52a241893e4
+                        quantity: 9
+                      - productId: 6371226fcecef52a241893e2
+                        quantity: 14
+            example:
+              inventoryItems:
+                - productId: 63712313cecef52a241893ea
+                  quantity: 30
+                - productId: 6371232dcecef52a241893ec
+                  quantity: 15
+                - productId: 637122e5cecef52a241893e8
+                  quantity: 12
+                - productId: 637122b0cecef52a241893e6
+                  quantity: 5
+                - productId: 63712286cecef52a241893e4
+                  quantity: 9
+                - productId: 6371226fcecef52a241893e2
+                  quantity: 14
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Inventory
+      summary: Show Single Inventory List
+      description: Show single inventory lists by Id for all except cashier
+      operationId: ShowSingleInventoryList
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /inventory/status/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The inventory ID
+    patch:
+      tags:
+        - Inventory
+      summary: Change List Status
+      description: Approve or Decline inventory lists, by passing approve or decline in the id parameter for owner and admin
+      operationId: ChangeListStatus
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ChangeListStatusRequest"
+                - example:
+                    status: declined
+            example:
+              status: declined
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Inventory
+      summary: Show inventory by status
+      description: Shows inventory lists by status according to what parameter you pass in(eg verified,declined or pending) in id  parameter for owner and admin
+      operationId: ShowinventorybyStatus
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /inventory/branchStatus/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The inventory ID
+    get:
+      tags:
+        - Inventory
+      summary: Show list by branch
+      description: Shows inventory list by status passed in and by users branch
+      operationId: Showlistbybranch
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /sale:
+    post:
+      tags:
+        - Sales
+      summary: Make a new sale
+      description: Make a sale for cashier only
+      operationId: Makeanewsale
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/MakeanewsaleRequest"
+                - example:
+                    saleList:
+                      - productId: 63712313cecef52a241893ea
+                        quantity: 2
+                      - productId: 6371232dcecef52a241893ec
+                        quantity: 5
+                      - productId: 637122b0cecef52a241893e6
+                        quantity: 5
+                    method: bank transfer
+            example:
+              saleList:
+                - productId: 63712313cecef52a241893ea
+                  quantity: 2
+                - productId: 6371232dcecef52a241893ec
+                  quantity: 5
+                - productId: 637122b0cecef52a241893e6
+                  quantity: 5
+              method: bank transfer
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Sales
+      summary: Show all Sales
+      description: Show all sales for all
+      operationId: ShowallSales
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /sale/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The sale ID
+    get:
+      tags:
+        - Sales
+      summary: Show single sale
+      description: Show single sales for all
+      operationId: Showsinglesale
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /sale/daily/today:
+    get:
+      tags:
+        - Sales
+      summary: Show Daily Sales
+      description: Show daily sales for all
+      operationId: ShowDailySales
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /sale/branch/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The inventory ID
+    get:
+      tags:
+        - Sales
+      summary: Show Sales by branch
+      description: Show sales by branch by passing values like benin, lagos or abuja in id pararmeter for all but cashier and warehouse-manager
+      operationId: ShowSalesbybranch
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /auth/registerOwner:
+    post:
+      tags:
+        - Auth
+      summary: Register Owner
+      description: Register the Super Admin other users will be registered by the super admin
+      operationId: RegisterOwner
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/RegisterOwnerRequest"
+                - example:
+                    name: Osama Okunbo
+                    role: owner
+                    password: "123456789"
+                    uniqueKey: biz7634@web32
+                    email: info.drosama@gmail.com
+            example:
+              name: Osama Okunbo
+              role: owner
+              password: "123456789"
+              uniqueKey: biz7634@web32
+              email: info.drosama@gmail.com
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+        - url: https://odd-rose-turkey-wear.cyclic.app/api/v1
+          variables: {}
+  /registerUser:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      description: Register other users besides like the admin, cashier and warehouse-manager
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/RegisterUserRequest"
+                - example:
+                    name: Umoru Emmanuel`
+                    role: ADMIN
+                    password: "123456789"
+                    email: umoru@gmail.com
+            example:
+              name: Umoru Emmanuel`
+              role: ADMIN
+              password: "123456789"
+              email: umoru@gmail.com
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /auth:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      description: Login Users with Email and Password
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/LoginRequest"
+                - example:
+                    password: "123456789"
+                    email: cashier1@gmail.com
+            example:
+              password: "123456789"
+              email: cashier1@gmail.com
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /showUsers:
+    get:
+      tags:
+        - User
+      summary: Show Users
+      description: Show all users for the super admin
+      operationId: ShowUsers
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /changePassword/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    patch:
+      tags:
+        - User
+      summary: Change Password
+      description: Change user password to be carried out by the super admin
+      operationId: ChangePassword
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ChangePasswordRequest"
+                - example:
+                    password: osama2016
+            example:
+              password: osama2016
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /deleteUser/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The inventory ID
+    delete:
+      tags:
+        - User
+      summary: Delete User
+      description: Delete a user for the super admin
+      operationId: DeleteUser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    RegisterOwnerRequest:
+      title: RegisterOwnerRequest
+      required:
+        - name
+        - role
+        - password
+        - uniqueKey
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+        password:
+          type: string
+        uniqueKey:
+          type: string
+        email:
+          type: string
+      example:
+        name: Osama Okunbo
+        role: owner
+        password: "123456789"
+        uniqueKey: biz7634@web32
+        email: info.drosama@gmail.com
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - name
+        - role
+        - password
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+      example:
+        name: Umoru Emmanuel`
+        role: ADMIN
+        password: "123456789"
+        email: umoru@gmail.com
+    ChangePasswordRequest:
+      title: ChangePasswordRequest
+      required:
+        - password
+      type: object
+      properties:
+        password:
+          type: string
+      example:
+        password: osama2016
+    LoginRequest:
+      title: LoginRequest
+      required:
+        - password
+        - email
+      type: object
+      properties:
+        password:
+          type: string
+        email:
+          type: string
+      example:
+        password: "123456789"
+        email: cashier1@gmail.com
+    CreateinventorylistRequest:
+      title: CreateinventorylistRequest
+      required:
+        - inventoryItems
+      type: object
+      properties:
+        inventoryItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/InventoryItem"
+          description: ""
+      example:
+        inventoryItems:
+          - productId: 63712313cecef52a241893ea
+            quantity: 30
+          - productId: 6371232dcecef52a241893ec
+            quantity: 25
+          - productId: 637122e5cecef52a241893e8
+            quantity: 60
+          - productId: 637122b0cecef52a241893e6
+            quantity: 50
+          - productId: 63712286cecef52a241893e4
+            quantity: 10
+          - productId: 6371226fcecef52a241893e2
+            quantity: 73
+    InventoryItem:
+      title: InventoryItem
+      required:
+        - productId
+        - quantity
+      type: object
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+      example:
+        productId: 63712313cecef52a241893ea
+        quantity: 30
+    EditinventorylistRequest:
+      title: EditinventorylistRequest
+      required:
+        - inventoryItems
+      type: object
+      properties:
+        inventoryItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/InventoryItem"
+          description: ""
+      example:
+        inventoryItems:
+          - productId: 63712313cecef52a241893ea
+            quantity: 30
+          - productId: 6371232dcecef52a241893ec
+            quantity: 15
+          - productId: 637122e5cecef52a241893e8
+            quantity: 12
+          - productId: 637122b0cecef52a241893e6
+            quantity: 5
+          - productId: 63712286cecef52a241893e4
+            quantity: 9
+          - productId: 6371226fcecef52a241893e2
+            quantity: 14
+    ChangeListStatusRequest:
+      title: ChangeListStatusRequest
+      required:
+        - status
+      type: object
+      properties:
+        status:
+          type: string
+      example:
+        status: declined
+    MakeanewsaleRequest:
+      title: MakeanewsaleRequest
+      required:
+        - saleList
+        - method
+      type: object
+      properties:
+        saleList:
+          type: array
+          items:
+            $ref: "#/components/schemas/SaleList"
+          description: ""
+        method:
+          type: string
+      example:
+        saleList:
+          - productId: 63712313cecef52a241893ea
+            quantity: 2
+          - productId: 6371232dcecef52a241893ec
+            quantity: 5
+          - productId: 637122b0cecef52a241893e6
+            quantity: 5
+        method: bank transfer
+    SaleList:
+      title: SaleList
+      required:
+        - productId
+        - quantity
+      type: object
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+      example:
+        productId: 63712313cecef52a241893ea
+        quantity: 2
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+  - httpBearer: []
+tags:
+  - name: Product
+  - name: Inventory
+  - name: Sales
+  - name: Auth
+    description: ""
+  - name: User
+    description: ""

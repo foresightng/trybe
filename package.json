@@ -1,0 +1,45 @@
+{
+  "name": "supplya_api",
+  "version": "1.0.0",
+  "description": "supplya rest api with microservice",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Supplya/Supplya_api.git"
+  },
+  "author": "osama okunbo, david osuchukwu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Supplya/Supplya_api.git/issues"
+  },
+  "homepage": "https://github.com/Supplya/Supplya_api.git#readme",
+  "dependencies": {
+    "api": "^6.1.1",
+    "axios": "^1.4.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-rate-limit": "^6.7.0",
+    "express-session": "^1.17.3",
+    "helmet": "^7.0.0",
+    "http-status-codes": "^2.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^5.13.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.2",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "rate-limiter": "^0.2.0",
+    "shortid": "^2.2.16",
+    "swagger-ui-express": "^4.6.3",
+    "xss-clean": "^0.1.1",
+    "yamljs": "^0.3.0"
+  }
+}
