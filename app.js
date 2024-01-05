@@ -23,13 +23,12 @@ const authenticateUser = require("./middleware/authenticateUser");
 
 //routers
 const auth = require("./routes/auth");
-const anchor = require("./routes/anchor");
 const product = require("./routes/product");
 const category = require("./routes/category");
 const inventory = require("./routes/inventory");
 const user = require("./routes/user");
 const order = require("./routes/order");
-const curacel = require("./routes/curacel");
+
 
 //errorhandlers
 const notFoundMiddleware = require("./middleware/not-found");
@@ -53,19 +52,17 @@ app.use(xss());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.get("/", (req, res) => {
   res.send(
-    '<h1>Supplya Api is live</h1><a href="/api-docs">API Documentation</a>'
+    '<h1>Trybe Api is live</h1>'
   );
 });
 
 //routes
 app.use("/api/v1/auth", auth);
-app.use("/api/v1/anchor", authenticateUser, anchor);
 app.use("/api/v1/products", product);
 app.use("/api/v1/categories", category);
 app.use("/api/v1/inventory", authenticateUser, inventory);
 app.use("/api/v1/users", user);
 app.use("/api/v1/orders", authenticateUser, order);
-app.use("/api/v1/curacel", curacel);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
